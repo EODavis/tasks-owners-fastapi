@@ -25,3 +25,4 @@ class Task(Base):
 
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     owner = relationship("User", back_populates="tasks")
+    
