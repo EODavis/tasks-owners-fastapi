@@ -34,7 +34,10 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
 @auth_router.post("/login", response_model=schemas.Token)
 def login(credentials: schemas.UserLogin, db: Session = Depends(get_db)) -> dict[str, str]:
     user = crud.get_user_by_email(db, credentials.email)
-    if not user or not verify_password(credentials.password, cast(str, user.hashed_password)):
+    if not user or not verify_password(
+        credentials.password, 
+        cast(str, user.hashed_password)
+    ):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid email or password")
 
     access_token = create_access_token({"sub": str(user.id)})
