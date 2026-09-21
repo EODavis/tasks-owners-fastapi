@@ -20,7 +20,12 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 
 def get_tasks_by_owner(db: Session, owner_id: int):
-    return db.query(models.Task).filter(models.Task.owner_id == owner_id).order_by(models.Task.id).all()
+    return (
+        db.query(models.Task)
+        .filter(models.Task.owner_id == owner_id)
+        .order_by(models.Task.id)
+        .all()
+    )
 
 
 def get_task_by_id(db: Session, task_id: int):
