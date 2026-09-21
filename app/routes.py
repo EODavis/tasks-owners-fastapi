@@ -1,6 +1,7 @@
+from typing import Callable, cast
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import Callable, cast
 
 from app import crud, schemas, models
 from app.database import get_db
